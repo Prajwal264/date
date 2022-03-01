@@ -1,0 +1,14 @@
+{
+  "name": "date-time",
+  "version": "1.0.0",
+  "description": "a simple library for date-time fetch & manipulation",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/Prajwal264/date.git",
+  "author": "Prajwal P",
+  "license": "MIT",
+  "files": [
+    "/dist"
+  ]
+}
