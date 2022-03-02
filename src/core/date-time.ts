@@ -1,5 +1,5 @@
 import { Weekdays } from '../enums/weekdays.enum';
-import { isString, isValid } from '../helpers/type.helper';
+import { isValid, isString } from '../helpers/type.helper';
 
 /**
  *
@@ -17,6 +17,23 @@ class DateTime extends Date {
   }
 
   /**
+   * If the year is a valid date, return it. Otherwise, return a new Date object
+   * @param {number | Date | string} year - The year to check.
+   * @returns Nothing.
+   */
+  public static getValidDate(year: number | Date | string): Date {
+    let validDate = new Date();
+    if(year instanceof Date) {
+      validDate = year;
+    } else if(isString(year) || typeof year === 'string') {
+      isValid(year);
+    } else if(!isNaN(year)) {
+      isValid(year);
+    }
+    return validDate;
+  }
+
+  /**
    * Given a year, return true if it is a leap year, false otherwise
    * @param {number} year - The year to check.
    * @returns A boolean value.
@@ -24,16 +41,11 @@ class DateTime extends Date {
   public static isLeapYear(year?: number | Date | string): boolean { // https://docs.microsoft.com/en-us/office/troubleshoot/excel/determine-a-leap-year
     let yearToBeChecked = new Date().getFullYear();
     if(year) {
-      if(year instanceof Date) {
-        yearToBeChecked = year.getFullYear();
-      } else if(isString(year)) {
-        if(isValid(year)) {
-          yearToBeChecked = new Date(year).getFullYear();
-        } else {
-          // TODO: invalid date
-          return false;
-        }
-      } 
+      try {
+        this.getValidDate(year);
+      } catch {
+        return false;
+      }
     }
     if(yearToBeChecked % 4 === 0) { 
       if(yearToBeChecked % 100 !== 0) { 
