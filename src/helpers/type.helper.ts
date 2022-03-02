@@ -8,16 +8,23 @@ const isString  = (obj: any) => {
 }
 
 /**
- * Check if the date is a valid date
- * @param {any} date - The date to be tested.
+ * It checks if the date is valid and if it is, it returns a date object.
+ * @param {any} date - The date to be parsed.
+ * @returns Nothing, the function is not returning anything.
  */
 const isValid = (date: any) => {
-  var parsedDate = Date.parse(date);
+  let isDateValid = false;
+  const parsedDate = Date.parse(date);
   if (isNaN(date) && !isNaN(parsedDate)) {
-      return true;
+      isDateValid = true;
   }
-  return false;
+  if(isDateValid) {
+    return new Date(date);
+  } else {
+    throw new TypeError('Invalid Date')
+  }
 }
+
 
 export {
   isString,
