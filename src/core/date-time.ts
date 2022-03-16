@@ -2,6 +2,7 @@ import { Weekdays } from '../enums/weekdays.enum';
 import { isValid, isString } from '../helpers/type.helper';
 import { getValidDate } from '../lib/getValidDate/index';
 import { getWeekdays } from '../lib/getWeekdays/index';
+import { isBefore } from '../lib/isBefore/index';
 import { isLeapYear } from '../lib/isLeapYear/index';
 import { isWeekday } from '../lib/isWeekday/index';
 import type {DateTimeInput} from '../types/input';
@@ -46,6 +47,15 @@ class DateTime extends Date {
    */
   public isWeekday(): boolean {
     return isWeekday(this)
+  }
+
+  /**
+   * Returns true if the current date is before the date to compare to
+   * @param {DateTimeInput} dateToCompare - The date to compare to.
+   * @returns A boolean value.
+   */
+  public isBefore(dateToCompare: DateTimeInput) {
+    return isBefore(this, dateToCompare);
   }
 }
 
