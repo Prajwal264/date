@@ -1,7 +1,7 @@
 import { Weekdays } from '../enums/weekdays.enum';
-import { isValid, isString } from '../helpers/type.helper';
 import { getValidDate } from '../lib/getValidDate/index';
 import { getWeekdays } from '../lib/getWeekdays/index';
+import { isAfter } from '../lib/isAfter/index';
 import { isBefore } from '../lib/isBefore/index';
 import { isLeapYear } from '../lib/isLeapYear/index';
 import { isToday } from '../lib/isToday/index';
@@ -52,11 +52,20 @@ class DateTime extends Date {
 
   /**
    * Returns true if the current date is before the date to compare to
-   * @param {DateTimeInput} dateToCompare - The date to compare to.
+   * @param {DateTimeInput} date - The date to compare to.
    * @returns A boolean value.
    */
-  public isBefore(dateToCompare: DateTimeInput) {
-    return isBefore(this, dateToCompare);
+  public isBefore(date: DateTimeInput) {
+    return isBefore(this, date);
+  }
+
+  /**
+   * Returns true if the current date is after the given date.
+   * @param {DateTimeInput} date - The date to compare to.
+   * @returns A boolean.
+   */
+  public isAfter(date: DateTimeInput) {
+    return isAfter(this, date);
   }
   
   /**
