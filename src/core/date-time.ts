@@ -5,7 +5,9 @@ import { isAfter } from '../lib/isAfter/index';
 import { isBefore } from '../lib/isBefore/index';
 import { isLeapYear } from '../lib/isLeapYear/index';
 import { isToday } from '../lib/isToday/index';
+import { isTomorrow } from '../lib/isTomorrow/index';
 import { isWeekday } from '../lib/isWeekday/index';
+import { isYesterday } from '../lib/isYesterday/index';
 import type {DateTimeInput} from '../types/input';
 
 /**
@@ -74,6 +76,22 @@ class DateTime extends Date {
    */
   public isToday() {
     return isToday(this);
+  }
+
+  /**
+   * Returns true if the date is tomorrow.
+   * @returns A boolean value.
+   */
+  public isTomorrow() {
+    return isTomorrow(this);
+  }
+
+  /**
+   * Returns true if the date is yesterday.
+   * @returns A boolean value.
+   */
+  public isYesterday() {
+    return isYesterday(this);
   }
 }
 
