@@ -1,5 +1,9 @@
 import { Weekdays } from '../enums/weekdays.enum';
 import { isValid, isString } from '../helpers/type.helper';
+import { getValidDate } from '../lib/getValidDate/index';
+import { getWeekdays } from '../lib/getWeekdays/index';
+import { isLeapYear } from '../lib/isLeapYear/index';
+import { isWeekday } from '../lib/isWeekday/index';
 import type {DateTimeInput} from '../types/input';
 
 /**
@@ -14,7 +18,8 @@ class DateTime extends Date {
    * @returns An array of Weekdays
    */
   public static getWeekdays(): Weekdays[] {
-    return Object.values(Weekdays)
+    const weekdays = getWeekdays();
+    return weekdays;
   }
 
   /**
@@ -23,66 +28,24 @@ class DateTime extends Date {
    * @returns Nothing.
    */
   public static getValidDate(year: DateTimeInput): Date {
-    let validDate = new Date();
-    if(year instanceof Date) {
-      validDate = year;
-    } else if(isString(year) || typeof year === 'string') {
-      validDate = isValid(year);
-    } else if(!isNaN(year)) {
-      validDate = isValid(year);
-    }
-    return validDate;
+    return getValidDate(year);
   }
 
   /**
    * Given a year, return true if it is a leap year, false otherwise
-   * @param {number} year - The year to check.
    * @returns A boolean value.
    */
-  public static isLeapYear(year?: DateTimeInput): boolean { // https://docs.microsoft.com/en-us/office/troubleshoot/excel/determine-a-leap-year
-    let yearToBeChecked = new Date().getFullYear();
-    if(year) {
-      try {
-        const validDate = this.getValidDate(year);
-        yearToBeChecked = validDate.getFullYear();
-      } catch {
-        // TODO: handler for invalid date needed.
-        return false;
-      }
-    }
-    if(yearToBeChecked % 4 === 0) { 
-      if(yearToBeChecked % 100 !== 0) { 
-        return true;
-      }
-    }
-    if(yearToBeChecked % 400 === 0) {
-      return true;
-    }
-    return false;
+  public isLeapYear(): boolean { // https://docs.microsoft.com/en-us/office/troubleshoot/excel/determine-a-leap-year
+    return isLeapYear(this)
   }
 
   /**
-   * @param {DateTimeInput} [day] - DateTimeInput
    * @returns a boolean value.
    *  If the day is a weekday, it returns true.
    *  If the day is a weekend, it returns false.
    */
-  public static isWeekday(day?: DateTimeInput): boolean {
-    let dayToBeChecked = new Date().getDay(); // 0 - sunday, 6 - saturday
-    if(day) {
-      try {
-        const validDate = this.getValidDate(day);
-        dayToBeChecked = validDate.getDay();
-      } catch {
-        // TODO: handler for invalid date needed.
-        return false;
-      }
-    }
-
-    if(dayToBeChecked % 6 === 0) {
-      return false;
-    }
-    return true;
+  public isWeekday(): boolean {
+    return isWeekday(this)
   }
 }
 
