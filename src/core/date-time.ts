@@ -4,6 +4,7 @@ import { getValidDate } from '../lib/getValidDate/index';
 import { getWeekdays } from '../lib/getWeekdays/index';
 import { isBefore } from '../lib/isBefore/index';
 import { isLeapYear } from '../lib/isLeapYear/index';
+import { isToday } from '../lib/isToday/index';
 import { isWeekday } from '../lib/isWeekday/index';
 import type {DateTimeInput} from '../types/input';
 
@@ -56,6 +57,14 @@ class DateTime extends Date {
    */
   public isBefore(dateToCompare: DateTimeInput) {
     return isBefore(this, dateToCompare);
+  }
+  
+  /**
+   * Returns true if the date is today, false otherwise
+   * @returns A boolean value.
+   */
+  public isToday() {
+    return isToday(this);
   }
 }
 
