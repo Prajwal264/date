@@ -11,7 +11,7 @@ export const isToday = (date: DateTimeInput) => {
   const validDate = getValidDate(date);
   const now = new DateTime();
   if(validDate.getUTCFullYear() === now.getUTCFullYear()) {
-    if(validDate.getUTCMonth() === now.getUTCMinutes()) {
+    if(validDate.getUTCMonth() === now.getUTCMonth()) {
       if(validDate.getUTCDate() === now.getUTCDate()) {
         return true;
       }

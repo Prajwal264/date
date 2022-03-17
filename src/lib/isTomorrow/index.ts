@@ -12,7 +12,7 @@ export const isTomorrow = (date: DateTimeInput) => {
   const now = new DateTime();
   const tomorrow = new DateTime(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   if(validDate.getUTCFullYear() === tomorrow.getUTCFullYear()) {
-    if(validDate.getUTCMonth() === tomorrow.getUTCMinutes()) {
+    if(validDate.getUTCMonth() === tomorrow.getUTCMonth()) {
       if(validDate.getUTCDate() === tomorrow.getUTCDate()) {
         return true;
       }

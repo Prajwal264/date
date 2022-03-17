@@ -12,7 +12,7 @@ export const isYesterday = (date: DateTimeInput) => {
   const now = new DateTime();
   const yesterday = new DateTime(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   if(validDate.getUTCFullYear() === yesterday.getUTCFullYear()) {
-    if(validDate.getUTCMonth() === yesterday.getUTCMinutes()) {
+    if(validDate.getUTCMonth() === yesterday.getUTCMonth()) {
       if(validDate.getUTCDate() === yesterday.getUTCDate()) {
         return true;
       }
